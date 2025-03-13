@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tableau emprunt</title>
+    <script src="./index.ts"></script>
+  </head>
+  <body>
+    <div id="inputs">
+      <label for="montant">Montant de l'emprunt : </label>
+      <input type="number" id="montant" />
+      <label for="taux">Taux d'intérêt : </label
+      ><input type="number" id="taux" />
+      <label for="durée">Durée en année : </label
+      ><input type="number" id="durée" />
+      <label for="periodicite">Periodicite de l'emprunt : </label>
+      <select id="periodicite">
+        <option value="mensuel">mensuel</option>
+        <option value="trimestriel">trimestriel</option>
+        <option value="semestriel">semestriel</option>
+        <option value="annuel">annuel</option>
+      </select>
+    </div>
+    <div id="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Période</th>
+            <th>Capital restant en début de période</th>
+            <th>Intérêt de la période</th>
+            <th>Amortissement du capitale</th>
+            <th id="periodDisplay">Annuité constante (ou mensualité)</th>
+            <th>Capital restant en fin de période</th>
+          </tr>
+        </thead>
+        <tbody id="tableau-body"></tbody>
+      </table>
+    </div>
+  </body>
+</html>
