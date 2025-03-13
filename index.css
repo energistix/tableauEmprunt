@@ -27,6 +27,7 @@ body {
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  box-sizing: border-box; /* Ensures padding is included in the width */
 }
 
 /* Table Styles */
