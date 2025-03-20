@@ -1,0 +1,81 @@
+/* index.css */
+body {
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+#inputs {
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px #0000001a;
+}
+
+#error {
+  display: none;
+  background-color: red;
+  border-radius: 8px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px #0000001a;
+}
+
+#inputs label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#inputs input, #inputs select, #inputs #export {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.tableau {
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px #0000001a;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  color: #fff;
+  background-color: #007bff;
+}
+
+th, td {
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  padding: 12px;
+}
+
+tbody tr:nth-child(2n) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+#total {
+  color: #155724;
+  background-color: #d4edda;
+  font-weight: bold;
+}
+
+#total td {
+  border-top: 2px solid #155724;
+}

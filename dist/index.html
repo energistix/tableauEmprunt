@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tableau emprunt</title>
     
-  <link rel="stylesheet" crossorigin href="./index-q7x9174p.css"><script type="module" crossorigin src="./index-wb4bq12r.js"></script></head>
+  <link rel="stylesheet" crossorigin href="./index-n41mv864.css"><script type="module" crossorigin src="./index-0cjdv62a.js"></script></head>
   <body>
     <div id="inputs">
       <label for="montant">Montant de l'emprunt : </label>
-      <input type="number" id="montant" value="0" />
+      <input type="number" id="montant" />
       <label for="taux">Taux d'intérêt : </label
-      ><input type="number" id="taux" value="0" />
+      ><input type="number" id="taux" />
       <label for="durée">Durée en années : </label
-      ><input type="number" id="durée" value="0" />
+      ><input type="number" id="durée" />
       <label for="periodicite">Periodicite de l'emprunt : </label>
       <select id="periodicite">
         <option value="mensuel">mensuel</option>
@@ -26,9 +26,15 @@
         <option value="annuité">Annuité constante</option>
         <option value="amortissement">Amortissement constant</option>
       </select>
+      <label for="periodicite">Format d'export : </label>
+      <select id="export-format">
+        <option value="pdf">PDF</option>
+        <option value="md">Markdown</option>
+      </select>
+      <button id="export">Export</button>
     </div>
     <div id="error"></div>
-    <div id="tableau">
+    <div id="tableau" class="tableau">
       <table>
         <thead>
           <tr>
