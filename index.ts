@@ -37,7 +37,7 @@ document.getElementById("montant")?.addEventListener("input", function () {
 });
 
 document.getElementById("taux")?.addEventListener("input", function () {
-  baseTaux = parseFloat((<HTMLInputElement>this).value);
+  baseTaux = parseFloat((<HTMLInputElement>this).value) || 0;
   validateInputAndBuild();
 });
 
@@ -121,6 +121,7 @@ function buildTableAnnuité() {
   //remove all children of tableBody
   tableBody.innerHTML = "";
   let annuitéConstante = (montant * taux) / (1 - (1 + taux) ** -duree);
+  if (taux === 0) annuitéConstante = montant / duree;
 
   const periodicityDisplay = document.getElementById("periodicityDisplay");
   if (periodicityDisplay === null)
@@ -268,3 +269,5 @@ function buildTableAmortissement() {
 
   tableBody?.appendChild(row);
 }
+
+validateInputAndBuild();
