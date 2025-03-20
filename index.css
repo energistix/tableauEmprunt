@@ -30,7 +30,8 @@ body {
 }
 
 #inputs input,
-#inputs select {
+#inputs select,
+#inputs #export {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -40,7 +41,7 @@ body {
 }
 
 /* Table Styles */
-#tableau {
+.tableau {
   margin: 20px;
   padding: 20px;
   background-color: #fff;

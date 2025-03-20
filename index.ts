@@ -1,4 +1,5 @@
 import "./index.css";
+import jspdf, { jsPDF } from "jspdf";
 
 type Periodicite = "mensuel" | "trimestriel" | "semestriel" | "annuel";
 type BaseType = "annuité" | "amortissement";
@@ -272,3 +273,69 @@ function buildTableAmortissement() {
 }
 
 validateInputAndBuild();
+
+function buildInfoTable() {
+  // Create a new table element
+  const infoTable = document.createElement("table");
+  infoTable.id = "info-table";
+  infoTable.classList.add("tableau");
+
+  // Create table headers
+  const headers = ["Paramètre", "Valeur"];
+  const headerRow = document.createElement("tr");
+  headers.forEach((headerText) => {
+    const th = document.createElement("th");
+    th.innerText = headerText;
+    headerRow.appendChild(th);
+  });
+  infoTable.appendChild(headerRow);
+
+  // Create table rows for each input value
+  const inputValues = [
+    { name: "Montant", value: baseMontant },
+    { name: "Taux", value: baseTaux },
+    { name: "Durée", value: baseDuree },
+    { name: "Périodicité", value: basePeriodicite },
+    { name: "Type", value: baseType + " constante" },
+  ];
+
+  inputValues.forEach((input) => {
+    const row = document.createElement("tr");
+
+    const nameCell = document.createElement("td");
+    nameCell.innerText = input.name;
+    row.appendChild(nameCell);
+
+    const valueCell = document.createElement("td");
+    valueCell.innerText = input.value.toString();
+    row.appendChild(valueCell);
+
+    infoTable.appendChild(row);
+  });
+
+  // Return the constructed table element
+  return infoTable;
+}
+
+document.getElementById("export")?.addEventListener("click", () => {
+  let tableBody = document.getElementById("tableau");
+  if (tableBody === null) throw new Error("tableau not found");
+
+  let exportElement = document.createElement("div");
+  exportElement.appendChild(buildInfoTable());
+  exportElement.appendChild(tableBody);
+
+  // @ts-ignore
+  const doc = new jsPDF();
+  doc.html(exportElement, {
+    callback: function (doc) {
+      doc.save();
+      document.body.appendChild(tableBody);
+    },
+    x: 1,
+    y: 1,
+    width: 65,
+    windowWidth: 200,
+    autoPaging: "text",
+  });
+});

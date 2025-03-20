@@ -26,9 +26,14 @@
         <option value="annuité">Annuité constante</option>
         <option value="amortissement">Amortissement constant</option>
       </select>
+      <label for="periodicite">Format d'export : </label>
+      <select id="Export format">
+        <option value="pdf">PDF</option>
+      </select>
+      <button id="export">Export</button>
     </div>
     <div id="error"></div>
-    <div id="tableau">
+    <div id="tableau" class="tableau">
       <table>
         <thead>
           <tr>
