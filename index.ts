@@ -202,9 +202,10 @@ function buildTableAmortissement() {
   //remove all children of tableBody
   tableBody.innerHTML = "";
 
-  const periodDisplay = document.getElementById("periodDisplay");
-  if (periodDisplay === null) throw new Error("periodDisplay not found");
-  periodDisplay.innerText = `${beautifyPeriodicity()}`;
+  const periodicityDisplay = document.getElementById("periodicityDisplay");
+  if (periodicityDisplay === null)
+    throw new Error("periodicityDisplay not found");
+  periodicityDisplay.innerText = `${beautifyPeriodicity()}`;
 
   let totalInteret = 0;
   let totalAmortissement = 0;
