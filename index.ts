@@ -9,29 +9,51 @@ let baseDuree = 0;
 let basePeriodicite: Periodicite = "mensuel";
 let baseType: BaseType = "annuité";
 
+function validateInputAndBuild() {
+  const errorElement = document.getElementById("error");
+  if (!errorElement) throw new Error("error element not found");
+  if (baseMontant <= 0) {
+    errorElement.innerText = "Montant doit être supérieur à 0";
+    errorElement.style.display = "block";
+    return;
+  }
+  if (baseTaux < 0) {
+    errorElement.innerText = "Taux doit être supérieur ou égal à 0";
+    errorElement.style.display = "block";
+    return;
+  }
+  if (baseDuree <= 0) {
+    errorElement.innerText = "Durée doit être positive";
+    errorElement.style.display = "block";
+    return;
+  }
+  errorElement.style.display = "none";
+  buildTable();
+}
+
 document.getElementById("montant")?.addEventListener("input", function () {
   baseMontant = parseFloat((<HTMLInputElement>this).value);
-  buildTable();
+  validateInputAndBuild();
 });
 
 document.getElementById("taux")?.addEventListener("input", function () {
   baseTaux = parseFloat((<HTMLInputElement>this).value);
-  buildTable();
+  validateInputAndBuild();
 });
 
 document.getElementById("durée")?.addEventListener("input", function () {
   baseDuree = parseFloat((<HTMLInputElement>this).value);
-  buildTable();
+  validateInputAndBuild();
 });
 
 document.getElementById("periodicite")?.addEventListener("change", function () {
   basePeriodicite = (<HTMLSelectElement>this).value as Periodicite;
-  buildTable();
+  validateInputAndBuild();
 });
 
 document.getElementById("type")?.addEventListener("change", function () {
   baseType = (<HTMLSelectElement>this).value as BaseType;
-  buildTable();
+  validateInputAndBuild();
 });
 
 function periodiciteMultiplier() {
