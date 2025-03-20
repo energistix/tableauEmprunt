@@ -60,7 +60,24 @@ function beautifyPeriodicity() {
   }
 }
 
+function getPeriode() {
+  switch (basePeriodicite) {
+    case "mensuel":
+      return "Mois";
+    case "trimestriel":
+      return "Trimestre";
+    case "semestriel":
+      return "Semestre";
+    case "annuel":
+      return "Année";
+  }
+}
+
 function buildTable() {
+  let periodDisplay = document.getElementById("periodDisplay");
+  if (!periodDisplay) throw new Error("periodDisplay not found");
+  periodDisplay.innerText = `${getPeriode()}`;
+
   switch (baseType) {
     case "annuité":
       buildTableAnnuité();
@@ -75,6 +92,7 @@ function buildTableAnnuité() {
   console.log("Building table");
   let montant = baseMontant;
   let taux = (1 + baseTaux / 100) ** (1 / periodiciteMultiplier()) - 1;
+  console.log(taux);
   let duree = baseDuree * periodiciteMultiplier();
   let tableBody = document.getElementById("tableau-body");
   if (tableBody === null) throw new Error("tableau-body not found");
@@ -82,9 +100,10 @@ function buildTableAnnuité() {
   tableBody.innerHTML = "";
   let annuitéConstante = (montant * taux) / (1 - (1 + taux) ** -duree);
 
-  const periodDisplay = document.getElementById("periodDisplay");
-  if (periodDisplay === null) throw new Error("periodDisplay not found");
-  periodDisplay.innerText = `${beautifyPeriodicity()} constante`;
+  const periodicityDisplay = document.getElementById("periodicityDisplay");
+  if (periodicityDisplay === null)
+    throw new Error("periodicityDisplay not found");
+  periodicityDisplay.innerText = `${beautifyPeriodicity()} constante`;
 
   let totalInteret = 0;
   let totalAmortissement = 0;
