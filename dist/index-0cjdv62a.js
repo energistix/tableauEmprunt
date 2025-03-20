@@ -18563,7 +18563,6 @@ for (i = 0;i < 32768; ++i) {
   rev[i] = ((x & 65280) >> 8 | (x & 255) << 8) >> 1;
 }
 var x;
-var i;
 var hMap = function(cd, mb, r) {
   var s = cd.length;
   var i = 0;
@@ -18603,20 +18602,15 @@ var hMap = function(cd, mb, r) {
 var flt = new u8(288);
 for (i = 0;i < 144; ++i)
   flt[i] = 8;
-var i;
 for (i = 144;i < 256; ++i)
   flt[i] = 9;
-var i;
 for (i = 256;i < 280; ++i)
   flt[i] = 7;
-var i;
 for (i = 280;i < 288; ++i)
   flt[i] = 8;
-var i;
 var fdt = new u8(32);
 for (i = 0;i < 32; ++i)
   fdt[i] = 5;
-var i;
 var flm = /* @__PURE__ */ hMap(flt, 9, 0);
 var flrm = /* @__PURE__ */ hMap(flt, 9, 1);
 var fdm = /* @__PURE__ */ hMap(fdt, 5, 0);
@@ -19335,7 +19329,7 @@ function L(t2) {
 function A(t2) {
   return String.fromCharCode((255 & t2) >> 0, (65280 & t2) >> 8, (16711680 & t2) >> 16, (4278190080 & t2) >> 24);
 }
-function x(t2) {
+function xxxxx(t2) {
   return y2(t2).map(A).join("");
 }
 var S = function(t2) {
@@ -19378,7 +19372,7 @@ function I(t2, e2, r2, n3) {
     i3 += k[t3];
   }), this.padding = "(¿N^NuAd\x00NVÿú\x01\b..\x00¶Ðh>/\f©þdSiz";
   var a3 = (e2 + this.padding).substr(0, 32), o3 = (r2 + this.padding).substr(0, 32);
-  this.O = this.processOwnerPassword(a3, o3), this.P = -(1 + (255 ^ i3)), this.encryptionKey = x(a3 + this.O + this.lsbFirstWord(this.P) + this.hexToBytes(n3)).substr(0, 5), this.U = P(this.encryptionKey, this.padding);
+  this.O = this.processOwnerPassword(a3, o3), this.P = -(1 + (255 ^ i3)), this.encryptionKey = xxxxx(a3 + this.O + this.lsbFirstWord(this.P) + this.hexToBytes(n3)).substr(0, 5), this.U = P(this.encryptionKey, this.padding);
 }
 function F(t2) {
   if (/[^\u0000-\u00ff]/.test(t2))
@@ -20808,9 +20802,9 @@ I.prototype.lsbFirstWord = function(t2) {
     e2.push(String.fromCharCode(parseInt(t2.substr(r2, 2), 16)));
   return e2.join("");
 }, I.prototype.processOwnerPassword = function(t2, e2) {
-  return P(x(e2).substr(0, 5), t2);
+  return P(xxxxx(e2).substr(0, 5), t2);
 }, I.prototype.encryptor = function(t2, e2) {
-  var r2 = x(this.encryptionKey + String.fromCharCode(255 & t2, t2 >> 8 & 255, t2 >> 16 & 255, 255 & e2, e2 >> 8 & 255)).substr(0, 10);
+  var r2 = xxxxx(this.encryptionKey + String.fromCharCode(255 & t2, t2 >> 8 & 255, t2 >> 16 & 255, 255 & e2, e2 >> 8 & 255)).substr(0, 10);
   return function(t3) {
     return P(r2, t3);
   };
@@ -24409,18 +24403,9 @@ function ee(t3) {
     }
     function vt2(t5, e3) {
       return 120 < e3 ? e3 - 120 : 1 <= (r3 = ((r3 = $n[e3 - 1]) >> 4) * t5 + (8 - (15 & r3))) ? r3 : 1;
-      var r3;
-    }
-    function bt2(t5, e3, r3) {
-      var n4 = L3(r3), i4 = t5[e3 += 255 & n4].g - 8;
-      return 0 < i4 && (x2(r3, r3.u + 8), n4 = L3(r3), e3 += t5[e3].value, e3 += n4 & (1 << i4) - 1), x2(r3, r3.u + t5[e3].g), t5[e3].value;
     }
     function yt2(t5, r3, n4) {
       return n4.g += t5.g, n4.value += t5.value << r3 >>> 0, e2(8 >= n4.g), t5.g;
-    }
-    function wt2(t5, r3, n4) {
-      var i4 = t5.xc;
-      return e2((r3 = i4 == 0 ? 0 : t5.vc[t5.md * (n4 >> i4) + (r3 >> i4)]) < t5.Wb), t5.Ya[r3];
     }
     function Nt2(t5, r3, i4, a4) {
       var o4 = t5.ab, s4 = t5.c * r3, c6 = t5.C;
