@@ -318,6 +318,23 @@ function buildInfoTable() {
 }
 
 document.getElementById("export")?.addEventListener("click", () => {
+  const exportFormatSelect = document.getElementById(
+    "export-format"
+  ) as HTMLSelectElement | null;
+  if (exportFormatSelect === null)
+    throw new Error("export format selector not found");
+
+  switch (exportFormatSelect.value) {
+    case "md":
+      exportMarkdown();
+      break;
+    case "pdf":
+      exportPDF();
+      break;
+  }
+});
+
+function exportPDF() {
   let tableBody = document.getElementById("tableau");
   if (tableBody === null) throw new Error("tableau not found");
 
@@ -338,4 +355,57 @@ document.getElementById("export")?.addEventListener("click", () => {
     windowWidth: 200,
     autoPaging: "text",
   });
-});
+}
+
+function exportMarkdown() {
+  // Generate Markdown content for user inputs
+  let infoMarkdown = "## Paramètres \n\n";
+  infoMarkdown += "| Paramètre | Valeur |\n";
+  infoMarkdown += "|-----------|--------|\n";
+
+  const inputValues = [
+    { name: "Montant", value: baseMontant },
+    { name: "Taux", value: baseTaux },
+    { name: "Durée", value: baseDuree },
+    { name: "Périodicité", value: basePeriodicite },
+    { name: "Type", value: baseType + " constante" },
+  ];
+
+  inputValues.forEach((input) => {
+    infoMarkdown += `| ${input.name} | ${input.value} |\n`;
+  });
+
+  // Generate Markdown content for calculated data
+  let dataMarkdown = "## Valeurs calculés\n\n";
+  dataMarkdown +=
+    "| Période | Capital | Intérêt | Amortissement | Annuité | Capital Restant |\n";
+  dataMarkdown +=
+    "|---------|---------|---------|---------------|---------|-----------------|\n";
+
+  const tableBody = document.getElementById("tableau-body");
+  if (tableBody) {
+    const rows = tableBody.getElementsByTagName("tr");
+    for (let i = 0; i < rows.length; i++) {
+      const cells = rows[i].getElementsByTagName("td");
+      let rowMarkdown = "|";
+      for (let j = 0; j < cells.length; j++) {
+        rowMarkdown += ` ${cells[j].innerText} |`;
+      }
+      dataMarkdown += rowMarkdown + "\n";
+    }
+  }
+
+  // Combine both tables into a single Markdown content
+  const markdownContent = infoMarkdown + "\n\n" + dataMarkdown;
+
+  // Create a Blob and trigger download
+  const blob = new Blob([markdownContent], { type: "text/markdown" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "loan_calculation.md";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
